@@ -5,6 +5,11 @@
 //  Created by 이주경 on 2022/09/19.
 //
 
+/*
+    [섹션 5] 다른 프레임워크 사용 (MapKit)
+    
+ */
+
 import SwiftUI
 import MapKit
 
