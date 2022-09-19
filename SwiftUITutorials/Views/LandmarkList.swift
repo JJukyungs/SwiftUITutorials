@@ -20,7 +20,10 @@
     - NavigationLink 자세히 파보기
  
     [섹션 2 - 7] 자식 View에 데이터 전달
-    
+    - view의 매개변수를 생성하여 데이터 전달할 수 있게 함
+ 
+    [섹션 2 - 8] 동적으로 미리보기 생성
+ 
  */
 
 import SwiftUI
@@ -43,6 +46,10 @@ struct LandmarkList: View {
 
 struct LandmarkList_Previews: PreviewProvider {
     static var previews: some View {
-        LandmarkList()
+        ForEach(["iPhone SE (2nd generation)", "iPhone XS Max"], id: \.self) { deviceName in
+            LandmarkList()
+                .previewDevice(PreviewDevice(rawValue: deviceName))
+                .previewDisplayName(deviceName)
+        }
     }
 }
