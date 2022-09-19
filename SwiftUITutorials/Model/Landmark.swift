@@ -11,13 +11,15 @@
     - 자료에서 받은 Json 파일을 추가
     - 사용할 Json 변수들을 모델로 구현
     - Json 데이터를 파싱 할 수 있게 메서드 구현
+    - Identifiable 추가하여 landmark 요소를 직접 사용할수 있게 함
+ 
  */
 
 import Foundation
 import SwiftUI
 import CoreLocation
 
-struct Landmark: Hashable, Codable {
+struct Landmark: Hashable, Codable, Identifiable {
     var id: Int
     var name: String
     var park: String
