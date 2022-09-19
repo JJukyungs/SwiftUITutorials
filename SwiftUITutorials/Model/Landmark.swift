@@ -12,6 +12,9 @@
     - 사용할 Json 변수들을 모델로 구현
     - Json 데이터를 파싱 할 수 있게 메서드 구현
     - Identifiable 추가하여 landmark 요소를 직접 사용할수 있게 함
+    
+    [섹션 3 - 1] 즐겨 찾기 추가
+    - isFavorite 추가하여 별 표시를 할 수 있게 추가
  
  */
 
@@ -25,6 +28,7 @@ struct Landmark: Hashable, Codable, Identifiable {
     var park: String
     var state: String
     var description: String
+    var isFavorite: Bool
     
     // 데이터에서 이미지 이름을 읽어오고 로드하는 메서드 생성
     private var imageName: String

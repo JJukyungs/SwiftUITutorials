@@ -13,6 +13,9 @@
     - PreviewProvider
     - 미리보기를 정확하게 랜더링
     - Group 을 사용하여 묶어서 사용 가능
+ 
+    [섹션 3 - 1] 즐겨 찾기 별 표시
+    
  */
 
 import SwiftUI
@@ -29,11 +32,19 @@ struct LandmarkRow: View {
             Text(landmark.name)
             
             Spacer()
+            
+            if landmark.isFavorite {
+                Image(systemName: "star.fill")
+                    .foregroundColor(.yellow)
+            }
         }
     }
 }
 
 struct LandmarkRow_Previews: PreviewProvider {
+    
+    static var landmarks = ModelData().landmarks
+    
     static var previews: some View {
         Group {
             LandmarkRow(landmark: landmarks[0])
