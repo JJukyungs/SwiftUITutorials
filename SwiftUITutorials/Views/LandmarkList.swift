@@ -13,14 +13,30 @@
     [섹션 2 - 5] List 동적으로 만들기
     - 개별 지정 말고 컬렉션에 직접 행을 생성
     - 클로저 활용하여 목록 불러오기
+ 
+ 
+    [섹션 2 - 6] Navtigation 연결
+    - List 클릭 시 Detail View 로 전환
+    - NavigationLink 자세히 파보기
+ 
+    [섹션 2 - 7] 자식 View에 데이터 전달
+    
  */
 
 import SwiftUI
 
 struct LandmarkList: View {
     var body: some View {
-        List(landmarks) { landmark in
-            LandmarkRow(landmark: landmark)
+        NavigationView {
+            List(landmarks) { landmark in
+                NavigationLink {
+                    LandmarkDetail(landmark: landmark)
+                } label: {
+                    LandmarkRow(landmark: landmark)
+                }
+            }
+            .navigationTitle("Landmarks")
+
         }
     }
 }

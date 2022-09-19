@@ -27,42 +27,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack{
-            MapView()
-                .ignoresSafeArea(edges: .top) // safeArea까지 넣을 수 있게 해줌
-                .frame(height: 300) // 매개변수만 지정하면 너비에 맞게 자동 조정
-            
-            CircleImage()
-                .offset(y: -130)
-                .padding(.bottom, -130)
-            
-            VStack(alignment: .leading) {
-                Text("Turtle Rock")
-                    .font(.title)
-                HStack {
-                    Text("Joshua Tree National Park")
-                        .font(.subheadline)
-                    Spacer()
-                    // Spacer() : 장치의 전체 너비를 사용하도록 하게 함
-                    // 상위 뷰의 모든 공간을 사용
-                    Text("California")
-                        .font(.subheadline)
-                }
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-                
-                Divider() // 구분선 넣기
-                
-                Text("About Turtle Rock")
-                    .font(.title2)
-                Text("Descriptive text goes here.")
-            }
-            // padding 약간의 공간 추가
-            .padding()
-            
-            // 외부 하단에 스페이서를 추가해 화면 상단으로 밀어넣기
-            Spacer()
-        }
+        LandmarkList()
     }
 }
 
