@@ -23,6 +23,20 @@ final class ModelData: ObservableObject {
     // Hike 데이터 로드 [수정을 하지 않기 때문에 @Published 사용 X]
     var hikes: [Hike] = load("hikeData.json")
 
+    // Category 데이터를 Dic에 추가하고 키에 Landmark 배열 연결
+    var categories: [String: [Landmark]] {
+        Dictionary(
+            grouping: landmarks,
+            by: { $0.category.rawValue }
+        )
+    }
+    
+    var features: [Landmark] {
+        landmarks.filter {
+            $0.isFeatured
+        }
+    }
+    
 }
 
 
