@@ -19,6 +19,9 @@ final class ModelData: ObservableObject {
     // 초기화 할 수 있도록 배열 선언
     // 관찰 가능한 개체는 구독자가 변경 사항을 선택 할 수 도있도록 데이터에 변경 사항을 게시해야함
     @Published var landmarks: [Landmark] = load("landmarkData.json")
+    
+    // Hike 데이터 로드 [수정을 하지 않기 때문에 @Published 사용 X]
+    var hikes: [Hike] = load("hikeData.json")
 
 }
 
