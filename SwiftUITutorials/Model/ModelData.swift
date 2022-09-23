@@ -20,9 +20,15 @@ final class ModelData: ObservableObject {
     // 관찰 가능한 개체는 구독자가 변경 사항을 선택 할 수 도있도록 데이터에 변경 사항을 게시해야함
     @Published var landmarks: [Landmark] = load("landmarkData.json")
     
+    // profile 인스턴스를 포함하도록 업데이트
+    @Published var profile = Profile.default
+    
     // Hike 데이터 로드 [수정을 하지 않기 때문에 @Published 사용 X]
     var hikes: [Hike] = load("hikeData.json")
 
+    
+    
+    
     // Category 데이터를 Dic에 추가하고 키에 Landmark 배열 연결
     var categories: [String: [Landmark]] {
         Dictionary(
