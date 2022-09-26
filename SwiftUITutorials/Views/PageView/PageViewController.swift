@@ -19,6 +19,10 @@ struct PageViewController<Page: View>: UIViewControllerRepresentable {
     
     var pages: [Page]
 
+    // Binding 추가
+    @Binding var currentPage: Int
+    
+    
     func makeCoordinator() -> Coordinator {
         Coordinator(parent: self)
     }
@@ -29,7 +33,7 @@ struct PageViewController<Page: View>: UIViewControllerRepresentable {
         
         uiViewController.setViewControllers(
 //            [UIHostingController(rootView: pages[0])], direction: .forward, animated: true)
-            [context.coordinator.controllers[0]], direction: .forward, animated: true
+            [context.coordinator.controllers[currentPage]], direction: .forward, animated: true
         )
     }
     
@@ -39,13 +43,15 @@ struct PageViewController<Page: View>: UIViewControllerRepresentable {
         let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
         
         pageViewController.dataSource = context.coordinator
+        pageViewController.delegate = context.coordinator
         
         return pageViewController
     }
     
     // Coordinator 내부에 중첩 클래스 선언
     // UIPageViewControllerDataSource 선언 [필수 메서드 작성]
-    class Coordinator: NSObject, UIPageViewControllerDataSource {
+    // UIPageViewControllerDelegate 선언 추가
+    class Coordinator: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
         
         var parent: PageViewController
         var controllers = [UIViewController]()
@@ -82,6 +88,17 @@ struct PageViewController<Page: View>: UIViewControllerRepresentable {
             }
             
             return controllers[index + 1]
+        }
+        
+        // Deleagate 메소드 추가
+        /// SwiftUI 는 페이지 전환 애니메이션이 완료될 때 마다 이 메서드를 호출하여 viewController의 Index를 찾아 Binding을 업데이트 할 수 있음
+        func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+            
+            if completed,
+               let visibleViewController = pageViewController.viewControllers?.first,
+               let index = controllers.firstIndex(of: visibleViewController) {
+                parent.currentPage = index
+            }
         }
     }
 }

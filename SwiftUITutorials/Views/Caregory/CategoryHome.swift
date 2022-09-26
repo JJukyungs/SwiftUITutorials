@@ -15,13 +15,12 @@ struct CategoryHome: View {
     var body: some View {
         NavigationView {
             List {
-                modelData.features[0].image
-                    .resizable()
-                    .scaledToFill()
-                    .frame(height: 200)
-                    .clipped()
-                    .listRowInsets(EdgeInsets()) // 디스플레의 가장자리까지 확장
-                
+                // PageView를 추가하고 PageControl 까지 가능하게 함
+                PageView(pages: modelData.features.map {
+                    FeatureCard(landmark: $0)
+                })
+                .aspectRatio(3 / 2, contentMode: .fit)
+                .listRowInsets(EdgeInsets()) // 가장자리까지 먹게
                 
                 ForEach(modelData.categories.keys.sorted(), id: \.self) { key in
                     CategoryRow(categoryName: key, items: modelData.categories[key]!)

@@ -10,9 +10,17 @@ import SwiftUI
 struct PageView<Page: View>: View {
     
     var pages: [Page]
+    // 값이 binding을 통해 전달되는지 확인
+    @State private var currentPage = 0
     
     var body: some View {
-        PageViewController(pages: pages)
+        ZStack(alignment: .bottomTrailing) {
+            PageViewController(pages: pages, currentPage: $currentPage)
+            // PageControl 추가
+            PageControl(numberOfPages: pages.count, currentPage: $currentPage)
+                .frame(width: CGFloat(pages.count * 18))
+                .padding(.trailing)
+        }
     }
 }
 
