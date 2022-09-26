@@ -47,6 +47,12 @@ struct Landmark: Hashable, Codable, Identifiable {
         Image(imageName)
     }
     
+    // Landmark feature 이미지가 있을 경우 이를 반환하는 구조
+    var featureImage: Image? {
+        isFeatured ? Image(imageName + "_feature") : nil
+    }
+    
+    
     private var coordinates: Coordinates
     
     var locationCoordinate: CLLocationCoordinate2D {
